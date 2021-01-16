@@ -75,6 +75,7 @@
     <Compile Include="src\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="src\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\Views\FileAccessRejectLogMenuView.xaml.cs">
       <DependentUpon>FileAccessRejectLogMenuView.xaml</DependentUpon>
@@ -158,6 +159,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
