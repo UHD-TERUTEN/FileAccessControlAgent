@@ -72,17 +72,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="src\view\FileAccessRejectLogMenu.xaml.cs">
-      <DependentUpon>FileAccessRejectLogMenu.xaml</DependentUpon>
+    <Compile Include="src\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="src\view\InquiryMenu.xaml.cs">
-      <DependentUpon>InquiryMenu.xaml</DependentUpon>
+    <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="src\Views\FileAccessRejectLogMenuView.xaml.cs">
+      <DependentUpon>FileAccessRejectLogMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="src\view\MainMenu.xaml.cs">
-      <DependentUpon>MainMenu.xaml</DependentUpon>
+    <Compile Include="src\Views\InquiryMenuView.xaml.cs">
+      <DependentUpon>InquiryMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\NavigationBar.xaml.cs">
+      <DependentUpon>NavigationBar.xaml</DependentUpon>
+    </Compile>
+    <Page Include="src\MainWindow.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Compile>
-    <Page Include="src\view\FileAccessRejectLogMenu.xaml">
+    </Page>
+    <Page Include="src\Views\FileAccessRejectLogMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,11 +108,15 @@
       <DependentUpon>FileAccessRejectPopup.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="src\view\InquiryMenu.xaml">
+    <Page Include="src\Views\InquiryMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\view\MainMenu.xaml">
+    <Page Include="src\Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\Views\NavigationBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
