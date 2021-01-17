@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using FileAccessControlAgent.ViewModels;
+using System;
+using System.Windows;
 
 namespace FileAccessControlAgent
 {
@@ -9,7 +11,16 @@ namespace FileAccessControlAgent
     {
         public MainWindow()
         {
+            ChangeMenuView = DoChangeMenuView;
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
+
+        private void DoChangeMenuView(object parameter)
+        {
+            ((MainWindowViewModel)DataContext).ChangeMenuView.Invoke(parameter);
+        }
+
+        public Action<object> ChangeMenuView { get; set; }
     }
 }

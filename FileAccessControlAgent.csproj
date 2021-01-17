@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="src\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\NavigationBarViewModel.cs" />
     <Compile Include="src\Views\FileAccessRejectLogMenuView.xaml.cs">
       <DependentUpon>FileAccessRejectLogMenuView.xaml</DependentUpon>
     </Compile>
@@ -86,8 +87,8 @@
     <Compile Include="src\Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="src\Views\NavigationBar.xaml.cs">
-      <DependentUpon>NavigationBar.xaml</DependentUpon>
+    <Compile Include="src\Views\NavigationBarView.xaml.cs">
+      <DependentUpon>NavigationBarView.xaml</DependentUpon>
     </Compile>
     <Page Include="src\MainWindow.xaml">
       <SubType>Designer</SubType>
@@ -117,7 +118,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\Views\NavigationBar.xaml">
+    <Page Include="src\Views\NavigationBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,8 +161,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

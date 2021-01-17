@@ -1,0 +1,47 @@
+﻿<UserControl
+    x:Class="FileAccessControlAgent.Views.NavigationBarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Blue"
+    d:DesignWidth="180"
+    d:DesignHeight="420"
+    mc:Ignorable="d">
+
+    <StackPanel
+        Width="180"
+        Height="420"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Background="#FF616161">
+
+        <Button
+            Width="180"
+            Height="95.239"
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left"
+            Click="OnButtonClick"
+            Tag="MainMenuView"
+            Content="홈" />
+        
+        <Button
+            Width="180"
+            Height="95.239"
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left"
+            Click="OnButtonClick"
+            Tag="FileAccessRejectLogMenuView"
+            Content="파일 접근 차단 로그" />
+        
+        <Button
+            Width="180"
+            Height="95.239"
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left"
+            Click="OnButtonClick"
+            Tag="InquiryMenuView"
+            Content="관제 서버 문의" />
+        
+    </StackPanel>
+</UserControl>
