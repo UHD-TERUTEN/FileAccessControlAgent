@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace FileAccessControlAgent.Views
 {
@@ -10,6 +11,7 @@ namespace FileAccessControlAgent.Views
         public NavigationBarView()
         {
             InitializeComponent();
+            mainMenuNavigateButton.Background = Brushes.Gray;
             DataContext = new NavigationBarViewModel();
         }
 
@@ -25,6 +27,14 @@ namespace FileAccessControlAgent.Views
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
             action.Invoke((sender as Button).Tag);
+            ColorButtons(sender as Button);
+        }
+
+        private void ColorButtons(Button clicked)
+        {
+            foreach (Button item in stackPanel.Children)
+                item.Background = SystemColors.ControlLightBrush;
+            clicked.Background = Brushes.Gray;
         }
     }
 }

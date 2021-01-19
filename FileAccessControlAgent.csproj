@@ -75,6 +75,7 @@
     <Compile Include="src\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="src\Samples\MenuSamples.cs" />
     <Compile Include="src\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\ViewModels\NavigationBarViewModel.cs" />
