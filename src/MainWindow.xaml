@@ -6,12 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:FileAccessControlAgent.Views"
     mc:Ignorable="d"
-    Background="Gray"
-    Style="{StaticResource MainWindowStyle}"
-    Name="myMainWindow"
-    Title="MainWindow"
-    Width="800"
-    Height="420">
+    Name="mainWindow"
+    Style="{StaticResource MainWindowStyle}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,7 +15,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <controls:NavigationBarView Grid.Column="0" action="{Binding ChangeMenuView, ElementName=myMainWindow}" />
+        <controls:NavigationBarView Grid.Column="0" action="{Binding ChangeMenuView, ElementName=mainWindow}" />
         <ContentControl Grid.Column="1" Content="{Binding CurrentMenuView}" />
     </Grid>
 </Window>
