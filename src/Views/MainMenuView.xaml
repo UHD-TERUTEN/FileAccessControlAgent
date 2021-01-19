@@ -4,16 +4,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignWidth="610"
-    d:DesignHeight="380"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Style="{StaticResource MenuViewStyle}">
     
     <Grid>
-        <!--<Path Data="M191,1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="191,1,0,0" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="1"/>-->
-        <TextBlock HorizontalAlignment="Left" Height="29" Margin="11,10,0,0" TextWrapping="Wrap" Text="최근 알림" VerticalAlignment="Top" Width="314"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="267" Margin="12,39,0,0" Stroke="Black" VerticalAlignment="Top" Width="580"/>
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="22,329,0,0" TextWrapping="Wrap" Text="화이트리스트" VerticalAlignment="Top" Width="81"/>
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="126,329,0,0" TextWrapping="Wrap" Text="v1.0.0" VerticalAlignment="Top" Width="73"/>
-        <Button HorizontalAlignment="Left" Height="51" Margin="233,314,0,0" VerticalAlignment="Top" Width="154" Content="관제 서버 동기화"/>
+        <TextBlock
+            Style="{StaticResource TextBlockStyle}"
+            Margin="10,10,0,0" Width="60" Text="최근 알림" />
+
+        <ScrollViewer
+            Name="recentNotifications"
+            Style="{StaticResource ScollViewerStyle}"
+            Margin="10,40,20,0" Height="290">
+            
+            <TextBlock Padding="2" />
+        </ScrollViewer>
+
+        <TextBlock
+            Style="{StaticResource TextBlockStyle}"
+            Margin="20,340,0,0" Width="80" Text="화이트리스트" />
+
+        <TextBlock
+            Name="whitelistVersion"
+            Style="{StaticResource TextBlockStyle}"
+            Margin="100,340,0,0" Width="40" Text="v1.0.0" />
+        
+        <Button
+            Name="syncWhitelistButton"
+            Style="{StaticResource DataSendButtonStyle}"
+            Margin="180,340,0,0" Content="업데이트" Click="Update" />
     </Grid>
 </UserControl>

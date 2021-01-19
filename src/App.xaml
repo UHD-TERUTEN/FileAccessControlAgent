@@ -5,8 +5,61 @@
     StartupUri="MainWindow.xaml">
     
     <Application.Resources>
+        <!--Default-->
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="DataSendButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+        <Style x:Key="MenuViewStyle" TargetType="{x:Type UserControl}">
+            <Setter Property="Width" Value="610" />
+            <Setter Property="Height" Value="380" />
+            <Setter Property="Background" Value="LightGray" />
+        </Style>
+        <Style x:Key="ScollViewerStyle" TargetType="{x:Type ScrollViewer}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+        </Style>
+        
+        <!--Main Window-->
         <Style x:Key="MainWindowStyle" TargetType="{x:Type Window}">
-            <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+            <Setter Property="WindowStyle" Value="SingleBorderWindow" />
+        </Style>
+        
+        <!--Navigation Bar-->
+        <Style x:Key="NavigationBarStyle" TargetType="{x:Type StackPanel}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="180" />
+            <Setter Property="Height" Value="420" />
+            <Setter Property="Background" Value="Gray" />
+        </Style>
+        <Style x:Key="NavigateButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="180" />
+            <Setter Property="Height" Value="90" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        
+        <!--Inquiry Menu-->
+        <Style x:Key="InquiryMenuTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="530" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
     </Application.Resources>
 </Application>

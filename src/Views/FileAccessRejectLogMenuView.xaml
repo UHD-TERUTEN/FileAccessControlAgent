@@ -5,16 +5,43 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignWidth="610"
-    d:DesignHeight="380">
-    
+    Style="{StaticResource MenuViewStyle}">
+
     <Grid>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="239.214" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="582"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="85.405" Margin="10,276.595,0,0" Stroke="Black" VerticalAlignment="Top" Width="582"/>
-        <TextBlock HorizontalAlignment="Left" Height="17.381" Margin="15,254.214,0,0" TextWrapping="Wrap" Text="Detail" VerticalAlignment="Top" Width="118.095"/>
-        <TextBlock HorizontalAlignment="Left" Height="15.381" Margin="15,10,0,0" TextWrapping="Wrap" Text="시간" VerticalAlignment="Top" Width="118.095"/>
-        <TextBlock HorizontalAlignment="Left" Height="15.381" Margin="138.095,10,0,0" TextWrapping="Wrap" Text="로그" VerticalAlignment="Top" Width="202.143"/>
-        <TextBlock HorizontalAlignment="Left" Height="15.381" Margin="402.142,10,0,0" TextWrapping="Wrap" Text="프로그램" VerticalAlignment="Top" Width="157.143"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="213.119" Margin="10,36.095,0,0" VerticalAlignment="Top" Width="582"/>
+        <ScrollViewer
+            Name="logList"
+            Style="{StaticResource ScollViewerStyle}"
+            Margin="10,20,20,0" Height="200">
+
+            <ListView BorderThickness="0" Width="566">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn
+                            Header="시간" Width="120"
+                            DisplayMemberBinding="{Binding Path=DateTime}" />
+                        
+                        <GridViewColumn
+                            Header="프로그램" Width="200"
+                            DisplayMemberBinding="{Binding Path=ProgramName}" />
+                        
+                        <GridViewColumn
+                            Header="로그" Width="240"
+                            DisplayMemberBinding="{Binding Path=Preview}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
+
+        <TextBlock
+            Style="{StaticResource TextBlockStyle}"
+            Margin="15,224,0,0" Width="40" Text="Details" />
+
+        <ScrollViewer
+            Name="logDetails"
+            Style="{StaticResource ScollViewerStyle}"
+            Margin="10,245,20,0" Height="115">
+
+            <TextBlock Padding="2" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

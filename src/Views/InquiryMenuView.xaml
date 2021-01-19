@@ -5,16 +5,39 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignWidth="610"
-    d:DesignHeight="380">
+    Style="{StaticResource MenuViewStyle}">
     
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Height="32" Margin="17.048,7,0,0" TextWrapping="Wrap" Text="제목" VerticalAlignment="Top" Width="95.952"/>
-        <TextBlock HorizontalAlignment="Left" Height="34.5" Margin="17.048,39,0,0" TextWrapping="Wrap" Text="로그" VerticalAlignment="Top" Width="95.952"/>
-        <TextBlock HorizontalAlignment="Left" Height="32.5" Margin="17.048,78.5,0,0" TextWrapping="Wrap" Text="내용" VerticalAlignment="Top" Width="95.952"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="131,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="448.5"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="131,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="448.5"/>
-        <TextBox HorizontalAlignment="Left" Height="246.5" Margin="131,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="448.5"/>
-        <Button Content="전송" HorizontalAlignment="Left" Height="25.5" Margin="501.5,336.5,0,0" VerticalAlignment="Top" Width="78"/>
+        <TextBlock
+            Style="{StaticResource TextBlockStyle}"
+            Margin="10,10,0,0" Text="제목" />
+
+        <TextBlock
+            Style="{StaticResource TextBlockStyle}"
+            Margin="10,45,0,0" Text="로그" />
+        
+        <TextBlock
+            Style="{StaticResource TextBlockStyle}"
+            Margin="10,80,0,0" Text="내용" />
+
+        <TextBox
+            Name="titleTextBox"
+            Style="{StaticResource InquiryMenuTextBoxStyle}"
+            Margin="50,10,0,0" />
+        
+        <TextBox
+            Name="logTextBox"
+            Style="{StaticResource InquiryMenuTextBoxStyle}"
+            Margin="50,45,0,0" />
+        
+        <TextBox
+            Name="contentTextBox"
+            Style="{StaticResource InquiryMenuTextBoxStyle}"
+            Margin="50,80,0,0" Height="250" AcceptsReturn="True" />
+        
+        <Button
+            Name="sendButton"
+            Style="{StaticResource DataSendButtonStyle}"
+            Margin="500,340,0,0" Content="보내기" Click="SendInquiry" />
     </Grid>
 </UserControl>
