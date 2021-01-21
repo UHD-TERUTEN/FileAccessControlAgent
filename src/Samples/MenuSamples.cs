@@ -1,36 +1,34 @@
-﻿using FileAccessControlAgent.Views;
+﻿using FileAccessControlAgent.Helpers;
+using FileAccessControlAgent.Views;
 using System.Collections.Generic;
 
 namespace FileAccessControlAgent.Samples
 {
     public static class MenuSamples
     {
-        public static List<LogInfo> LogListSample
+        private static void InitSampleRecentNotifications()
         {
-            get
-            {
-                List<LogInfo> sampleLogList = new List<LogInfo>();
-                sampleLogList.Add(new LogInfo("2021-01-18", "WINWORD.EXE", "파일 접근 거부"));
-                sampleLogList.Add(new LogInfo("2021-01-19", "WINWORD.EXE", "파일 접근 거부"));
-                sampleLogList.Add(new LogInfo("2021-01-20", "EXCEL.EXE", "파일 접근 거부"));
-                return sampleLogList;
-            }
+            _ = "insert into RecentNotifications VALUES ('화이트리스트 업데이트 v1.0.0')".Execute();
+            _ = "insert into RecentNotifications VALUES ('화이트리스트 업데이트 v1.0.1')".Execute();
         }
 
-        public static List<string> RecentNotifications
+        private static void InitSampleWhitelistVersion()
         {
-            get
-            {
-                List<string> sampleRecentNotifications = new List<string>();
-                sampleRecentNotifications.Add("화이트리스트 업데이트 v1.0.1");
-                sampleRecentNotifications.Add("화이트리스트 업데이트 v1.0.0");
-                return sampleRecentNotifications;
-            }
+            _ = "insert into WhitelistVersion VALUES ('v1.0.12')".Execute();
         }
 
-        public static string WhitelistVersion
+        private static void InitSampleLogList()
         {
-            get { return "v1.0.1"; }
+            _ = "insert into LogList VALUES ('2021-01-18', 'WINWORD.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-19', 'WINWORD.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+        }
+
+        public static void InitSampleData()
+        {
+            InitSampleRecentNotifications();
+            InitSampleWhitelistVersion();
+            InitSampleLogList();
         }
     }
 }

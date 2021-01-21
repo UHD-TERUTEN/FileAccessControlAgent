@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
-using FileAccessControlAgent.Samples;
+using FileAccessControlAgent.Helpers;
 
 namespace FileAccessControlAgent.Views
 {
@@ -26,10 +25,10 @@ namespace FileAccessControlAgent.Views
             InitializeComponent();
 
             var logListView = logList.Content as ListView;
-            foreach (LogInfo logInfo in MenuSamples.LogListSample)
-            {
+
+            foreach (var logInfo in "select * from LogList".Read<LogInfo>())
                 logListView.Items.Add(logInfo);
-            }
+
             logListView.SelectionChanged += LogListSelectionChanged;
         }
 
