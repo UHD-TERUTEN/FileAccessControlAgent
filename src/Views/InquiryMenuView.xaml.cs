@@ -26,8 +26,13 @@ namespace FileAccessControlAgent.Views
                 $"로그 :\t{logTextBox.Text}" + Environment.NewLine +
                 $"내용 :\t{contentTextBox.Text}";
 
-            if (MessageBox.Show(confirmMessage, "문의사항 보내기", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            if (MessageBox.Show(confirmMessage,
+                                "문의사항 보내기",
+                                MessageBoxButton.YesNo,
+                                MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
                 MessageBox.Show("문의사항을 보냈습니다.");
+            }
         }
     }
 }
