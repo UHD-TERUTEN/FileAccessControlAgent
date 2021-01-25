@@ -1,6 +1,4 @@
 ﻿using FileAccessControlAgent.Helpers;
-using FileAccessControlAgent.Views;
-using System.Collections.Generic;
 
 namespace FileAccessControlAgent.Samples
 {
