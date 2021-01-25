@@ -98,6 +98,8 @@
     <Compile Include="src\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="src\Managers\FileAccessRejectLogManager.cs" />
+    <Compile Include="src\Managers\TCPRequestManager.cs" />
     <Compile Include="src\Samples\MenuSamples.cs" />
     <Compile Include="src\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
@@ -122,7 +124,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\FileAccessRejectPopup.xaml">
+    <Page Include="src\Views\FileAccessRejectPopupView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -130,8 +132,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\FileAccessRejectPopup.xaml.cs">
-      <DependentUpon>FileAccessRejectPopup.xaml</DependentUpon>
+    <Compile Include="src\Views\FileAccessRejectPopupView.xaml.cs">
+      <DependentUpon>FileAccessRejectPopupView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="src\Views\InquiryMenuView.xaml">
