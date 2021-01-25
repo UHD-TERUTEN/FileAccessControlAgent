@@ -33,6 +33,5 @@ namespace FileAccessControlAgent
             _ = "drop table if exists WhitelistVersion".Execute();
             _ = "drop table if exists LogList".Execute();
         }
-
     }
 }
