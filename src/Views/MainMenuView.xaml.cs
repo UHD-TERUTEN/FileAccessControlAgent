@@ -1,4 +1,5 @@
 ﻿using FileAccessControlAgent.Helpers;
+using FileAccessControlAgent.Managers;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,9 +11,18 @@ namespace FileAccessControlAgent.Views
         public string notification { get; private set; }
     }
 
-    public class WhitelistVersion
+    public class WhitelistVersion : ITCPResponse
     {
-        public string version { get; private set; }
+        private string result;
+
+        public string Result { get { return result; } set { result = value; } }
+        public string Version { get; set; }
+    }
+
+    public class GetWhitelistVersion : ITCPRequest
+    {
+        public string Method { get { return "Get"; } }
+        public string Target { get { return "WhitelistVersion"; } }
     }
 
     public partial class MainMenuView : UserControl
@@ -30,12 +40,13 @@ namespace FileAccessControlAgent.Views
             }
 
             // Load the whitelistVersion
-            whitelistVersion.Text = "select * from WhitelistVersion".Read<WhitelistVersion>()[0].version;
+            whitelistVersion.Text = "select * from WhitelistVersion".Read<WhitelistVersion>()[0].Version;
         }
 
         private void Update(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("화이트리스트를 업데이트했습니다.");
+            var res = (new GetWhitelistVersion()).SendRequest<WhitelistVersion>();
+            MessageBox.Show($"[{res.Result}] 화이트리스트를 업데이트했습니다.\n{res.Version}");
         }
     }
 }
