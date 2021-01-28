@@ -1,13 +1,11 @@
 ﻿using FileAccessControlAgent.Helpers;
+using FileAccessControlAgent.Managers;
 using FileAccessControlAgent.Samples;
-using System.IO;
+using System.Threading;
 using System.Windows;
 
 namespace FileAccessControlAgent
 {
-    /// <summary>
-    /// App.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
@@ -18,6 +16,8 @@ namespace FileAccessControlAgent
             DropTables();
             CreateTables();
             MenuSamples.InitSampleData();
+
+            ThreadPool.QueueUserWorkItem(FileAccessRejectLogManager.ReceiveFileAccessLog);
         }
 
         private static void CreateTables()

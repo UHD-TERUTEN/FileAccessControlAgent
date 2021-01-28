@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace FileAccessControlAgent.Managers
 {
@@ -26,6 +22,11 @@ namespace FileAccessControlAgent.Managers
     {
         public static ReturnType SendRequest<ReturnType>(this ITCPRequest request) where ReturnType : ITCPResponse
         {
+            return SendRequest<ReturnType>(JsonSerializer.SerializeToUtf8Bytes((dynamic)request));
+        }
+
+        public static ReturnType SendRequest<ReturnType>(this string request) where ReturnType : ITCPResponse
+        {
             var emptyResponse = new EmptyResponse();
 
             using (var pipeClient = new NamedPipeClientStream(".", "testpipe", PipeDirection.InOut))
@@ -37,7 +38,7 @@ namespace FileAccessControlAgent.Managers
                 {
                     using (var binaryWriter = new BinaryWriter(pipeClient, Encoding.UTF8))
                     {
-                        binaryWriter.Write(JsonSerializer.SerializeToUtf8Bytes((dynamic)request));
+                        binaryWriter.Write(request);
                         binaryWriter.Flush();
 
                         using (var streamReader = new StreamReader(pipeClient, Encoding.UTF8))

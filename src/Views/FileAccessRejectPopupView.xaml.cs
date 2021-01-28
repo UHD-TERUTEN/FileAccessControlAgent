@@ -20,5 +20,10 @@ namespace FileAccessControlAgent
                 Top = corner.Y - ActualHeight;
             }));
         }
+
+        private void Storyboard_Completed(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
