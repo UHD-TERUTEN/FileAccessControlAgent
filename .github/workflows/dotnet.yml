@@ -1,0 +1,49 @@
+name: .NET Core Windows Application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+    
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Restore dependencies	
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration ${{ env.Configuration }} --no-restore
+      env:
+        Configuration: ${{ matrix.configuration }}
+      
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    
+    - name: Publish
+      run: dotnet publish --configuration ${{ env.Configuration }}
+      env:
+        Configuration: ${{ matrix.configuration }}
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Publish ${{ env.Configuration }}
+        path: D:\a\FileAccessControlAgent\FileAccessControlAgent\bin\${{ env.Configuration }}\net5.0-windows\publish\
+      env:
+        Configuration: ${{ matrix.configuration }}
