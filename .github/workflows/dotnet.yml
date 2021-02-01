@@ -45,5 +45,6 @@ jobs:
       with:
         name: Publish ${{ env.Configuration }}
         path: D:\a\FileAccessControlAgent\FileAccessControlAgent\bin\${{ env.Configuration }}\net5.0-windows\publish\
+        retention-days: 7
       env:
         Configuration: ${{ matrix.configuration }}
