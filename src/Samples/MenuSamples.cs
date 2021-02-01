@@ -20,6 +20,18 @@ namespace FileAccessControlAgent.Samples
             _ = "insert into LogList VALUES ('2021-01-18', 'WINWORD.EXE', '파일 접근 거부')".Execute();
             _ = "insert into LogList VALUES ('2021-01-19', 'WINWORD.EXE', '파일 접근 거부')".Execute();
             _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
         }
 
         public static void InitSampleData()

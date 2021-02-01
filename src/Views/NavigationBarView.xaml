@@ -4,26 +4,42 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     mc:Ignorable="d" 
     d:DesignWidth="180" d:DesignHeight="420">
 
-    <StackPanel Name="stackPanel" Style="{StaticResource NavigationBarStyle}">
+    <StackPanel Name="stackPanel" Style="{StaticResource NavigationBarStyle}" >
         <Button
             Name="mainMenuNavigateButton"
             Style="{StaticResource NavigateButtonStyle}"
-            Click="OnButtonClick" Tag="MainMenuView"
-            Content="홈" />
-        
+            Click="OnButtonClick" Tag="MainMenuView">
+
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconBoxIcons Width="24" Height="24" Margin="12 0 8 0" Kind="SolidHome" />
+                <TextBlock Margin="0 4 0 0" Text="홈" />
+            </StackPanel>
+        </Button>
+
         <Button
             Name="fileAccessRejectLogMenuNavigateButton"
             Style="{StaticResource NavigateButtonStyle}"
-            Click="OnButtonClick" Tag="FileAccessRejectLogMenuView"
-            Content="파일 접근 차단 로그" />
+            Click="OnButtonClick" Tag="FileAccessRejectLogMenuView">
+
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconBoxIcons Width="24" Height="24" Margin="12 0 8 0" Kind="SolidFileFind" />
+                <TextBlock Margin="0 4 0 0" Text="파일 접근 차단 로그" />
+            </StackPanel>
+        </Button>
 
         <Button
             Name="inquiryMenuNavigateButton"
             Style="{StaticResource NavigateButtonStyle}"
-            Click="OnButtonClick" Tag="InquiryMenuView"
-            Content="관제 서버 문의" />
+            Click="OnButtonClick" Tag="InquiryMenuView">
+
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconBoxIcons Width="24" Height="24" Margin="12 0 8 0" Kind="SolidMessageAltEdit" />
+                <TextBlock Margin="0 4 0 0" Text="관제 서버 문의" />
+            </StackPanel>
+        </Button>
     </StackPanel>
 </UserControl>

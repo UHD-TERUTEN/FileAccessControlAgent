@@ -11,7 +11,7 @@ namespace FileAccessControlAgent.Views
         public NavigationBarView()
         {
             InitializeComponent();
-            mainMenuNavigateButton.Background = Brushes.Gray;
+            ColorButtons(mainMenuNavigateButton);
             DataContext = new NavigationBarViewModel();
         }
 
@@ -33,8 +33,8 @@ namespace FileAccessControlAgent.Views
         private void ColorButtons(Button clicked)
         {
             foreach (Button item in stackPanel.Children)
-                item.Background = SystemColors.ControlLightBrush;
-            clicked.Background = Brushes.Gray;
+                item.Background = Brushes.LightSkyBlue;
+            clicked.Background = Brushes.White;
         }
     }
 }
