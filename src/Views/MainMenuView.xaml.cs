@@ -47,7 +47,7 @@ namespace FileAccessControlAgent.Views
         {
             progressRing.IsActive = true;
             var res = (new GetWhitelistVersion()).SendRequest<WhitelistVersion>();
-            MessageBox.Show($"[{res.Result}] 화이트리스트를 업데이트했습니다.\n{res.Version}");
+            MessageBox.Show($"화이트리스트를 업데이트했습니다.\n[{res.Result}] {res.Version}");
             progressRing.IsActive = false;
         }
     }
