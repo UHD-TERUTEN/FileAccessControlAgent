@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     mc:Ignorable="d"
     Style="{StaticResource MenuViewStyle}">
     
@@ -32,6 +33,13 @@
         <Button
             Name="syncWhitelistButton"
             Style="{StaticResource DataSendButtonStyle}"
-            Margin="180,340,0,0" Content="업데이트" Click="Update" />
+            Margin="160,340,0,0" Content="업데이트" Click="Update" />
+
+        <mah:ProgressRing
+            Name="progressRing"
+            Foreground="{DynamicResource AccentColorBrush}"
+            Width="20" Height="20"
+            HorizontalAlignment="Left"
+            Margin="260,320,0,0" IsActive="False" />
     </Grid>
 </UserControl>
