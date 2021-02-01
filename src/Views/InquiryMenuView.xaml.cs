@@ -17,7 +17,7 @@ namespace FileAccessControlAgent.Views
                 || logTextBox.Text.Length == 0
                 || contentTextBox.Text.Length == 0)
             {
-                MessageBox.Show("일부 항목이 비어있습니다.\n모든 항목을 채운 뒤 보내기 버튼을 눌러주세요.");
+                MessageBox.Show("일부 항목이 비어있습니다.\n모든 항목을 채운 뒤 보내기 버튼을 눌러주세요.", "알림", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

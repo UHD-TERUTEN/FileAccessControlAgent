@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using FileAccessControlAgent.Helpers;
 
@@ -44,9 +45,14 @@ namespace FileAccessControlAgent.Views
 
         private void Inquire(object sender, System.Windows.RoutedEventArgs e)
         {
-            var logInfo = logList.SelectedItem as LogInfo;
-            InquiryMenuView.LogParam = $"{logInfo.DateTime} [{logInfo.ProgramName}] {logInfo.Preview}";
-            navigateToInquiry.Invoke();
+            if (logList.SelectedItem == null)
+                MessageBox.Show("로그를 선택해주세요.", "알림", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+            {
+                var logInfo = logList.SelectedItem as LogInfo;
+                InquiryMenuView.LogParam = $"{logInfo.DateTime} [{logInfo.ProgramName}] {logInfo.Preview}";
+                navigateToInquiry.Invoke();
+            }
         }
 
         private Action navigateToInquiry;
