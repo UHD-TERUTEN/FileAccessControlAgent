@@ -14,7 +14,7 @@
 
         <ScrollViewer
             Name="recentNotifications"
-            Style="{StaticResource ScollViewerStyle}"
+            Style="{StaticResource ScrollViewerStyle}"
             Margin="10,40,20,0" Height="290">
             
             <TextBlock Padding="2" />

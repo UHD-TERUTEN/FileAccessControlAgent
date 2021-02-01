@@ -20,26 +20,35 @@ namespace FileAccessControlAgent.Views
 
     public partial class FileAccessRejectLogMenuView : UserControl
     {
-        public FileAccessRejectLogMenuView()
+        public FileAccessRejectLogMenuView(Action NavigateToInquiry)
         {
             InitializeComponent();
 
-            var logListView = logList.Content as ListView;
-
             foreach (var logInfo in "select * from LogList".Read<LogInfo>())
-                logListView.Items.Add(logInfo);
+                logList.Items.Add(logInfo);
 
-            logListView.SelectionChanged += LogListSelectionChanged;
+            logList.SelectionChanged += LogListSelectionChanged;
+
+            navigateToInquiry = NavigateToInquiry;
         }
 
         private void LogListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var logInfo = (logList.Content as ListView).SelectedItem as LogInfo;
+            var logInfo = logList.SelectedItem as LogInfo;
 
             (logDetails.Content as TextBlock).Text =
                 $"DateTime :\t{logInfo.DateTime}" + Environment.NewLine +
                 $"ProgramName :\t{logInfo.ProgramName}" + Environment.NewLine +
                 $"Preview :\t{logInfo.Preview}";
         }
+
+        private void Inquire(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var logInfo = logList.SelectedItem as LogInfo;
+            InquiryMenuView.LogParam = $"{logInfo.DateTime} [{logInfo.ProgramName}] {logInfo.Preview}";
+            navigateToInquiry.Invoke();
+        }
+
+        private Action navigateToInquiry;
     }
 }

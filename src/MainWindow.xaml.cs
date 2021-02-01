@@ -1,7 +1,8 @@
 ﻿using FileAccessControlAgent.ViewModels;
 using MahApps.Metro.Controls;
 using System;
-using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 
 namespace FileAccessControlAgent
 {
@@ -14,12 +15,19 @@ namespace FileAccessControlAgent
         {
             ChangeMenuView = DoChangeMenuView;
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(NavigateToInquiryMenu);
         }
 
         private void DoChangeMenuView(object parameter)
         {
             ((MainWindowViewModel)DataContext).ChangeMenuView.Invoke(parameter);
+        }
+
+        private void NavigateToInquiryMenu()
+        {
+            ButtonAutomationPeer peer = new ButtonAutomationPeer(nav.inquiryMenuNavigateButton);
+            IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+            invokeProv.Invoke();
         }
 
         public Action<object> ChangeMenuView { get; set; }

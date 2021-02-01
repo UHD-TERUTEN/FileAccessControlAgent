@@ -7,10 +7,10 @@ namespace FileAccessControlAgent.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public MainWindowViewModel()
+        public MainWindowViewModel(Action NavigateToInquiry)
         {
             mainMenuView = new MainMenuView();
-            fileAccessRejectLogMenuView = new FileAccessRejectLogMenuView();
+            fileAccessRejectLogMenuView = new FileAccessRejectLogMenuView(NavigateToInquiry);
             inquiryMenuView = new InquiryMenuView();
 
             CurrentMenuView = mainMenuView;
