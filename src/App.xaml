@@ -33,7 +33,15 @@
                 <Setter Property="Height" Value="380" />
                 <Setter Property="Background" Value="LightGray" />
             </Style>
-            <Style x:Key="ScollViewerStyle" TargetType="{x:Type ScrollViewer}">
+            <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Margin" Value="10,20,20,0" />
+                <Setter Property="Height" Value="175" />
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            </Style>
+            <Style x:Key="ScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
                 <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="Background" Value="WhiteSmoke" />
             </Style>
@@ -63,7 +71,7 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Background" Value="LightSteelBlue" />
+                <Setter Property="Background" Value="LightSkyBlue" />
                 <Setter Property="HorizontalContentAlignment" Value="Left" />
             </Style>
 

@@ -8,38 +8,37 @@
     Style="{StaticResource MenuViewStyle}">
 
     <Grid>
-        <ScrollViewer
-            Name="logList"
-            Style="{StaticResource ScollViewerStyle}"
-            Margin="10,20,20,0" Height="200">
-
-            <ListView BorderThickness="0" Width="566">
-                <ListView.View>
-                    <GridView AllowsColumnReorder="True">
-                        <GridViewColumn
+        <ListView Name="logList" Style="{StaticResource ListViewStyle}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True">
+                    <GridViewColumn
                             Header="시간" Width="120"
                             DisplayMemberBinding="{Binding Path=DateTime}" />
-                        
-                        <GridViewColumn
+
+                    <GridViewColumn
                             Header="프로그램" Width="200"
                             DisplayMemberBinding="{Binding Path=ProgramName}" />
-                        
-                        <GridViewColumn
+
+                    <GridViewColumn
                             Header="로그" Width="240"
                             DisplayMemberBinding="{Binding Path=Preview}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ScrollViewer>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <TextBlock
             Style="{StaticResource TextBlockStyle}"
-            Margin="15,224,0,0" Width="40" Text="Details" />
+            Margin="15,205,0,0" Width="40" Text="Details" />
+
+        <Button
+            Name="inquiryButton"
+            Style="{StaticResource DataSendButtonStyle}"
+            Margin="510,200,0,0" Content="문의" Click="Inquire" />
 
         <ScrollViewer
             Name="logDetails"
-            Style="{StaticResource ScollViewerStyle}"
-            Margin="10,245,20,0" Height="115">
+            Style="{StaticResource ScrollViewerStyle}"
+            Margin="10,230,20,0" Height="130">
 
             <TextBlock Padding="2" />
         </ScrollViewer>
