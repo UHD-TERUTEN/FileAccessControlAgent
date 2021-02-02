@@ -30,7 +30,7 @@
         <Grid.Triggers>
             <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                 <BeginStoryboard>
-                    <Storyboard Completed="Storyboard_Completed">
+                    <Storyboard Completed="StoryboardOnComplete">
                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)">
                             <SplineDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
                             <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>

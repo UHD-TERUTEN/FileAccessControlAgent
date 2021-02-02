@@ -21,7 +21,7 @@ namespace FileAccessControlAgent
             DataContext = new MainWindowViewModel(NavigateToInquiryMenu);
         }
 
-        private void mainWindowOnLoad(object sender, RoutedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
             notifyIcon = new NotifyIcon()
             {

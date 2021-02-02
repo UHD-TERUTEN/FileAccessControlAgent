@@ -31,22 +31,22 @@ namespace FileAccessControlAgent.Views
                 MessageBox.Show("문의사항을 보냈습니다.");
         }
 
-        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void OnDataContextChange(object sender, DependencyPropertyChangedEventArgs e)
         {
             logTextBox.Text = LogParam ?? "";
         }
 
-        private void titleTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void titleTextBoxOnTextChange(object sender, TextChangedEventArgs e)
         {
             title = (sender as TextBox).Text;
         }
 
-        private void logTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void logTextBoxOnTextChange(object sender, TextChangedEventArgs e)
         {
             LogParam = (sender as TextBox).Text;
         }
 
-        private void contentTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void contentTextBoxOnTextChange(object sender, TextChangedEventArgs e)
         {
             content = (sender as TextBox).Text;
         }

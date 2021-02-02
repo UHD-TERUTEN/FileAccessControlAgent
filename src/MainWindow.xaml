@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Name="mainWindow"
     WindowTransitionsEnabled="False"
-    Loaded="mainWindowOnLoad"
+    Loaded="OnLoad"
     GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
     Style="{StaticResource MainWindowStyle}">
     

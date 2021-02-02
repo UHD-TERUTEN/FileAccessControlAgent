@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContextChanged="UserControl_DataContextChanged"
+    DataContextChanged="OnDataContextChange"
     Style="{StaticResource MenuViewStyle}">
     
     <Grid>
@@ -24,19 +24,19 @@
         <TextBox
             Name="titleTextBox"
             Style="{StaticResource InquiryMenuTextBoxStyle}"
-            TextChanged="titleTextBox_TextChanged"
+            TextChanged="titleTextBoxOnTextChange"
             Margin="50,10,0,0" />
         
         <TextBox
             Name="logTextBox"
             Style="{StaticResource InquiryMenuTextBoxStyle}"
-            TextChanged="logTextBox_TextChanged"
+            TextChanged="logTextBoxOnTextChange"
             Margin="50,45,0,0" />
         
         <TextBox
             Name="contentTextBox"
             Style="{StaticResource InquiryMenuTextBoxStyle}"
-            TextChanged="contentTextBox_TextChanged"
+            TextChanged="contentTextBoxOnTextChange"
             Margin="50,80,0,0" Height="250" AcceptsReturn="True" />
         
         <Button

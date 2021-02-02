@@ -21,7 +21,7 @@ namespace FileAccessControlAgent
             }));
         }
 
-        private void Storyboard_Completed(object sender, EventArgs e)
+        private void StoryboardOnComplete(object sender, EventArgs e)
         {
             Close();
         }
