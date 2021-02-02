@@ -1,15 +1,11 @@
 ﻿using FileAccessControlAgent.ViewModels;
 using MahApps.Metro.Controls;
-using MahApps.Metro.IconPacks;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace FileAccessControlAgent
 {
