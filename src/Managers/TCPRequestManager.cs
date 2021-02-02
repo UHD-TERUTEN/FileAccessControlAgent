@@ -29,7 +29,7 @@ namespace FileAccessControlAgent.Managers
         {
             var emptyResponse = new EmptyResponse();
 
-            using (var pipeClient = new NamedPipeClientStream(".", "testpipe", PipeDirection.InOut))
+            using (var pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut))
             {
                 if (!pipeClient.IsConnected)
                     pipeClient.Connect();
@@ -57,5 +57,7 @@ namespace FileAccessControlAgent.Managers
                 return (ReturnType)Convert.ChangeType(emptyResponse, typeof(ReturnType));
             }
         }
+
+        private static readonly string pipeName = "TcpPipe";
     }
 }
