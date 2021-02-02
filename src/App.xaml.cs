@@ -2,6 +2,8 @@
 using FileAccessControlAgent.Managers;
 using FileAccessControlAgent.Samples;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
@@ -25,8 +27,31 @@ namespace FileAccessControlAgent
             CreateTables();
             MenuSamples.InitSampleData();
 
-            // Run threads
+            // Run processes and threads
+            string parentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName + "\\";
+            using (var streamReader = new StreamReader(parentDirectory + argumentsPath))
+            {
+                string arguments = streamReader.ReadLine();
+                if (arguments != null)
+                {
+                    tcpClient = new Process()
+                    {
+                        StartInfo = new ProcessStartInfo(parentDirectory + tcpClientPath, arguments)
+                        {
+                            CreateNoWindow = true,
+                            UseShellExecute = false,
+                        }
+                    };
+                    tcpClient.Start();
+                }
+            }
             ThreadPool.QueueUserWorkItem(FileAccessRejectLogManager.ReceiveFileAccessLog);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            tcpClient.Kill();
+            base.OnExit(e);
         }
 
         private new void DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -52,5 +77,11 @@ namespace FileAccessControlAgent
             _ = "drop table if exists WhitelistVersion".Execute();
             _ = "drop table if exists LogList".Execute();
         }
+
+        private static readonly string argumentsPath = "arguments.txt";
+
+        private static readonly string tcpClientPath = "tcp_client.exe";
+
+        private Process tcpClient;
     }
 }
