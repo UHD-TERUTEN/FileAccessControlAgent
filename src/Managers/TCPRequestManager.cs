@@ -22,7 +22,7 @@ namespace FileAccessControlAgent.Managers
     {
         public static ReturnType SendRequest<ReturnType>(this ITCPRequest request) where ReturnType : ITCPResponse
         {
-            return SendRequest<ReturnType>(JsonSerializer.SerializeToUtf8Bytes((dynamic)request));
+            return SendRequest<ReturnType>(JsonSerializer.Serialize((dynamic)request));
         }
 
         public static ReturnType SendRequest<ReturnType>(this string request) where ReturnType : ITCPResponse
