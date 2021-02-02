@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace FileAccessControlAgent.Helpers
 {
@@ -12,6 +13,14 @@ namespace FileAccessControlAgent.Helpers
         public static MessageBoxResult Warning(string message)
         {
             return MessageBox.Show(message, "알림", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        public static MessageBoxResult Error(Exception e)
+        {
+            if (e.GetType() == typeof(NotImplementedException))
+                return MessageBox.Show("미구현 항목입니다.");
+            else
+                return MessageBox.Show(e.Message);
         }
     }
 }

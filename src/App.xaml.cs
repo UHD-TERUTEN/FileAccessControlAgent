@@ -1,8 +1,10 @@
 ﻿using FileAccessControlAgent.Helpers;
 using FileAccessControlAgent.Managers;
 using FileAccessControlAgent.Samples;
+using System;
 using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace FileAccessControlAgent
 {
@@ -12,12 +14,29 @@ namespace FileAccessControlAgent
         {
             base.OnStartup(e);
 
+            // Add exception handler
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomainUnhandledException;
+            Current.DispatcherUnhandledException += DispatcherUnhandledException;
+            Dispatcher.UnhandledException += DispatcherUnhandledException;
+
+            // Initialize the database
             DBManager.Init();
             DropTables();
             CreateTables();
             MenuSamples.InitSampleData();
 
+            // Run threads
             ThreadPool.QueueUserWorkItem(FileAccessRejectLogManager.ReceiveFileAccessLog);
+        }
+
+        private new void DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBoxHelper.Error(e.Exception);
+        }
+
+        private static void CurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            MessageBoxHelper.Error(e.ExceptionObject as Exception);
         }
 
         private static void CreateTables()
