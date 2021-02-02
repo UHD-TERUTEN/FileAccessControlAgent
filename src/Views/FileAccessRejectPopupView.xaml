@@ -7,9 +7,9 @@
     Width="600" Height="200"
     SizeToContent="Height"
     WindowStyle="None"
-    AllowsTransparency="True" Background="LightGray">
+    AllowsTransparency="True" Background="Transparent">
 
-    <Grid RenderTransformOrigin="0,1" >
+    <Grid RenderTransformOrigin="0,1" Background="LightGray" >
 
         <!-- Notification area -->
         <Border BorderThickness="1" BorderBrush="Black" Margin="10">
