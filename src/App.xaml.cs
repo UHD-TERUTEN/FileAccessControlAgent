@@ -27,31 +27,18 @@ namespace FileAccessControlAgent
             CreateTables();
             MenuSamples.InitSampleData();
 
-            // Run processes and threads
+            // Run threads
             string parentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName + "\\";
             using (var streamReader = new StreamReader(parentDirectory + argumentsPath))
             {
-                string arguments = streamReader.ReadLine();
+                string[] arguments = streamReader.ReadLine()?.Split(' ');
                 if (arguments != null)
                 {
-                    tcpClient = new Process()
-                    {
-                        StartInfo = new ProcessStartInfo(parentDirectory + tcpClientPath, arguments)
-                        {
-                            CreateNoWindow = true,
-                            UseShellExecute = false,
-                        }
-                    };
-                    tcpClient.Start();
+                    TCPRequestManager.Server = arguments[0];
+                    TCPRequestManager.Port = int.Parse(arguments[1]);
                 }
             }
             ThreadPool.QueueUserWorkItem(FileAccessRejectLogManager.ReceiveFileAccessLog);
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            tcpClient.Kill();
-            base.OnExit(e);
         }
 
         private new void DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -79,9 +66,5 @@ namespace FileAccessControlAgent
         }
 
         private static readonly string argumentsPath = "arguments.txt";
-
-        private static readonly string tcpClientPath = "tcp_client.exe";
-
-        private Process tcpClient;
     }
 }

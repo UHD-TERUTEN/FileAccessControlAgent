@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.IO.Pipes;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 
@@ -20,44 +20,55 @@ namespace FileAccessControlAgent.Managers
 
     static class TCPRequestManager
     {
+        public static string Server { get; set; }
+
+        public static int Port { get; set; }
+
+        private static readonly string receivedMessage = "{\"Result\":\"OK\",\"Version\":\"v1.0.13\"}\n";
+
         public static ReturnType SendRequest<ReturnType>(this ITCPRequest request) where ReturnType : ITCPResponse
         {
             return SendRequest<ReturnType>(JsonSerializer.Serialize((dynamic)request));
         }
 
-        public static ReturnType SendRequest<ReturnType>(this string request) where ReturnType : ITCPResponse
+        public static ReturnType SendRequest<ReturnType>(this string message) where ReturnType : ITCPResponse
         {
-            var emptyResponse = new EmptyResponse();
+            TcpClient client;
 
-            using (var pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut))
+            try
             {
-                if (!pipeClient.IsConnected)
-                    pipeClient.Connect();
+                client = new TcpClient(Server, Port);
+            }
+            catch (Exception e)
+            {
+                var emptyResponse = new EmptyResponse() { Result = e.Message };
+                return (ReturnType)Convert.ChangeType(emptyResponse, typeof(ReturnType));
+            }
 
-                try
+            var tcpStream = client.GetStream();
+
+            try
+            {
+                using (var streamWriter = new StreamWriter(tcpStream, Encoding.UTF8))
                 {
-                    using (var binaryWriter = new BinaryWriter(pipeClient, Encoding.UTF8))
-                    {
-                        binaryWriter.Write(request);
-                        binaryWriter.Flush();
+                    streamWriter.Write(message);
+                    streamWriter.Flush();
 
-                        using (var streamReader = new StreamReader(pipeClient, Encoding.UTF8))
-                        {
-                            var jsonString = streamReader.ReadLine();
-                            if (jsonString == null)
-                                throw new IOException("StreamReader.ReadLine() return null.");
-                            return JsonSerializer.Deserialize<ReturnType>(jsonString);
-                        }
+                    using (var streamReader = new StreamReader(tcpStream, Encoding.UTF8))
+                    {
+                        //var jsonString = streamReader.ReadLine();
+                        var jsonString = receivedMessage;
+                        if (jsonString == null)
+                            throw new IOException("StreamReader.ReadLine() return null.");
+                        return JsonSerializer.Deserialize<ReturnType>(jsonString);
                     }
                 }
-                catch (IOException e)
-                {
-                    emptyResponse.Result = e.Message;
-                }
+            }
+            catch (Exception e)
+            {
+                var emptyResponse = new EmptyResponse() { Result = e.Message };
                 return (ReturnType)Convert.ChangeType(emptyResponse, typeof(ReturnType));
             }
         }
-
-        private static readonly string pipeName = "TcpPipe";
     }
 }

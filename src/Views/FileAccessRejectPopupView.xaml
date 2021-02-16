@@ -7,6 +7,7 @@
     Width="600" Height="200"
     SizeToContent="Height"
     WindowStyle="None"
+    Topmost="True"
     AllowsTransparency="True" Background="Transparent">
 
     <Grid RenderTransformOrigin="0,1" Background="LightGray" >
