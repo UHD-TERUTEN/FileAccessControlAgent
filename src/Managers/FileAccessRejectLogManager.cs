@@ -57,58 +57,66 @@ namespace FileAccessControlAgent.Managers
         {
             while (true)
             {
-                using (var pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.InOut))
-                {
-                    pipeServer.WaitForConnection();
+                using var pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.InOut);
 
-                    LogData logData;
+                pipeServer.WaitForConnection();
+
+                LogData logData;
+
+                using var streamReader = new StreamReader(pipeServer, Encoding.UTF8);
+                string jsonString = "";
+                char[] buffer = new char[512];
+                int nread = 0;
+
+                try
+                {
+                    do
+                    {
+                        nread = streamReader.Read(buffer);
+                        jsonString += new string(buffer, 0, nread);
+                    }
+                    while (nread == 512);
+
+                    logData = JsonSerializer.Deserialize<LogData>(jsonString);
+
+                    Func<LogData, bool> CheckWhitelist = (LogData logData) =>
+                    {
+                        return !logData.fileInfo.fileName.Contains(".jpg");
+                    };
+                    bool result = CheckWhitelist(logData);
 
                     try
                     {
-                        using (var streamReader = new StreamReader(pipeServer, Encoding.UTF8))
+                        using (var streamWriter = new StreamWriter(pipeServer))
                         {
-                            string jsonString = "";
-                            char[] buffer = new char[512];
-                            int nread = 0;
-
-                            do
-                            {
-                                nread = streamReader.Read(buffer);
-                                jsonString += new string(buffer, 0, nread);
-                            }
-                            while (nread == 512);
-
-                            logData = JsonSerializer.Deserialize<LogData>(jsonString);
-
-                            using (var binaryWriter = new BinaryWriter(pipeServer))
-                            {
-                                bool whitelistCheckResult = true;
-                                binaryWriter.Write(whitelistCheckResult);
-                                binaryWriter.Flush();
-
-                                if (whitelistCheckResult)
-                                {
-                                    // Show pop-up message
-                                    Task.Factory.StartNew(() =>
-                                    {
-                                        Application.Current.Dispatcher.Invoke(() =>
-                                        {
-                                            var popup = new FileAccessRejectPopup();
-                                            popup.ShowDialog();
-                                        });
-                                    });
-
-                                    // Send the reject log to the server
-                                    var response = jsonString.SendRequest<SendResponse>();
-                                    MessageBox.Show(response.Result);
-                                }
-                            }
+                            streamWriter.Write(result);
+                            streamWriter.Flush();
                         }
                     }
                     catch (IOException e)
                     {
                         MessageBox.Show(e.Message);
                     }
+
+                    if (!result)
+                    {
+                        // Show pop-up message
+                        Task.Factory.StartNew(() =>
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                var popup = new FileAccessRejectPopup();
+                                popup.ShowDialog();
+                            });
+                        });
+
+                        // Send the reject log to the server
+                        _ = jsonString.SendRequest<SendResponse>();
+                    }
+                }
+                catch (IOException e)
+                {
+                    MessageBox.Show(e.Message);
                 }
             }
         }
