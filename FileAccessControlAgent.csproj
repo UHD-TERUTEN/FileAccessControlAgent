@@ -22,9 +22,16 @@
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <StartupObject></StartupObject>
+    <StartupObject>FileAccessControlAgent.App</StartupObject>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="test\**" />
+    <EmbeddedResource Remove="test\**" />
+    <EntityDeploy Remove="test\**" />
+    <None Remove="test\**" />
+    <Page Remove="test\**" />
+  </ItemGroup>
   <ItemGroup>
     <Page Remove="src\App.xaml" />
   </ItemGroup>

@@ -38,7 +38,6 @@ namespace FileAccessControlAgent
                     TCPRequestManager.Port = int.Parse(arguments[1]);
                 }
             }
-            ThreadPool.QueueUserWorkItem(FileAccessRejectLogManager.ReceiveFileAccessLog);
         }
 
         private new void DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
