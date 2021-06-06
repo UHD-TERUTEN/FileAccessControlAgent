@@ -1,16 +1,22 @@
 ﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
+using System.Windows;
 
 namespace FileAccessControlAgent.Helpers
 {
     public static class DBManager
     {
-        public static void Init()
+        public static bool Init()
         {
             if (!File.Exists(dbName))
+            {
                 SQLiteConnection.CreateFile(dbName);
+                return true;
+            }
+            return false;
         }
 
 #if DEBUG
@@ -61,16 +67,50 @@ namespace FileAccessControlAgent.Helpers
 #else
         public static int Execute(this string sql)
         {
+            int result = -1;
+
             using (var conn = new SQLiteConnection(connString))
             {
-                conn.Open();
-                var command = new SQLiteCommand(sql, conn);
-                var result = command.ExecuteNonQuery();
+                try
+                {
+                    conn.Open();
+                    var command = new SQLiteCommand(sql, conn);
+                    result = command.ExecuteNonQuery();
 
-                command.Dispose();
-                conn.Close();
-                return result;
+                    command.Dispose();
+                    conn.Close();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
             }
+            return result;
+        }
+
+        public static int Execute(this string sql, Dictionary<string, string> keyValuePairs)
+        {
+            int result = -1;
+
+            using (var conn = new SQLiteConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    var command = new SQLiteCommand(sql, conn);
+                    foreach (var keyValuePair in keyValuePairs)
+                        command.Parameters.AddWithValue(keyValuePair.Key, keyValuePair.Value);
+                    result = command.ExecuteNonQuery();
+
+                    command.Dispose();
+                    conn.Close();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+            return result;
         }
 
         public static List<T> Read<T>(this string sql)
@@ -79,23 +119,30 @@ namespace FileAccessControlAgent.Helpers
 
             using (var conn = new SQLiteConnection(connString))
             {
-                conn.Open();
-                var command = new SQLiteCommand(sql, conn);
-                var reader = command.ExecuteReader();
-                var parser = reader.GetRowParser<T>(typeof(T));
+                try
+                {
+                    conn.Open();
+                    var command = new SQLiteCommand(sql, conn);
+                    var reader = command.ExecuteReader();
+                    var parser = reader.GetRowParser<T>(typeof(T));
 
-                while (reader.Read())
-                    result.Add(parser(reader));
+                    while (reader.Read())
+                        result.Add(parser(reader));
 
-                reader.Close();
-                command.Dispose();
-                conn.Close();
+                    reader.Close();
+                    command.Dispose();
+                    conn.Close();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
             }
             return result;
         }
 #endif
 
-        private static readonly string dbName = "test.sqlite";
+        private static readonly string dbName = "db.sqlite";
         
         private static readonly string connString = $"Data Source={dbName};Version=3";
     }

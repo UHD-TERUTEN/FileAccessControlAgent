@@ -1,21 +1,27 @@
 ﻿using System;
-using System.Windows;
+using System.IO;
+using System.Text.Json;
 using System.Windows.Controls;
 using FileAccessControlAgent.Helpers;
+using FileAccessControlAgent.Managers;
 
 namespace FileAccessControlAgent.Views
 {
     public class LogInfo
     {
-        public string DateTime { get; private set; }
         public string ProgramName { get; private set; }
-        public string Preview { get; private set; }
+        public string FileName { get; private set; }
+        public string Operation { get; private set; }
+        public string PlainText { get; private set; }
+        public bool IsAccept { get; private set; }
 
-        public LogInfo(string dateTime, string programName, string preview)
+        public LogInfo(string programName, string fileName, string operation, string plainText, bool isAccept)
         {
-            DateTime = dateTime;
             ProgramName = programName;
-            Preview = preview;
+            FileName = fileName;
+            Operation = operation;
+            PlainText = plainText;
+            IsAccept = isAccept;
         }
     }
 
@@ -24,12 +30,8 @@ namespace FileAccessControlAgent.Views
         public FileAccessRejectLogMenuView(Action NavigateToInquiry)
         {
             InitializeComponent();
-
-            foreach (var logInfo in "select * from LogList".Read<LogInfo>())
-                logList.Items.Add(logInfo);
-
+            UpdateData();
             logList.SelectionChanged += LogListSelectionChanged;
-
             navigateToInquiry = NavigateToInquiry;
         }
 
@@ -37,10 +39,9 @@ namespace FileAccessControlAgent.Views
         {
             var logInfo = logList.SelectedItem as LogInfo;
 
-            (logDetails.Content as TextBlock).Text =
-                $"DateTime :\t{logInfo.DateTime}" + Environment.NewLine +
-                $"ProgramName :\t{logInfo.ProgramName}" + Environment.NewLine +
-                $"Preview :\t{logInfo.Preview}";
+            var obj = JsonSerializer.Deserialize<LogData>(logInfo.PlainText);
+            var pretty = JsonSerializer.Serialize(obj, jsonOptions);
+            (logDetails.Content as TextBlock).Text = pretty;
         }
 
         private void Inquire(object sender, System.Windows.RoutedEventArgs e)
@@ -50,11 +51,33 @@ namespace FileAccessControlAgent.Views
             else
             {
                 var logInfo = logList.SelectedItem as LogInfo;
-                InquiryMenuView.LogParam = $"{logInfo.DateTime} [{logInfo.ProgramName}] {logInfo.Preview}";
+                InquiryMenuView.LogParam1 = $"[{logInfo.ProgramName}] {logInfo.Operation} [{logInfo.FileName}]";
+                InquiryMenuView.LogParam2 = logInfo.PlainText;
                 navigateToInquiry.Invoke();
             }
         }
 
         private Action navigateToInquiry;
+
+        private void UpdateData()
+        {
+            var logs = "select * from LogList".Read<LogInfo>();
+            if (logs.Count > 0)
+            {
+                foreach (var logInfo in logs)
+                    logList.Items.Add(logInfo);
+            }
+        }
+
+        private void OnLoad(object sender, System.Windows.RoutedEventArgs e)
+        {
+            UpdateData();
+        }
+
+        private static readonly JsonSerializerOptions jsonOptions =
+            new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            };
     }
 }

@@ -8,6 +8,7 @@ namespace test
 {
     public class DBManagerTest
     {
+#if DEBUG
         private static void InitializeDb()
         {
             SQLiteConnection.CreateFile(dbName);
@@ -128,5 +129,6 @@ namespace test
         private static readonly string dbName = "dbUnitTest.sqlite";
 
         private static readonly string connString = $"Data Source={dbName};Version=3";
+#endif
     }
 }

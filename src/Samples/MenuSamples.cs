@@ -17,21 +17,21 @@ namespace FileAccessControlAgent.Samples
 
         private static void InitSampleLogList()
         {
-            _ = "insert into LogList VALUES ('2021-01-18', 'WINWORD.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-19', 'WINWORD.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
-            _ = "insert into LogList VALUES ('2021-01-20', 'EXCEL.EXE', '파일 접근 거부')".Execute();
+            _ = "insert into LogList VALUES ('WINWORD.EXE', 'foo.txt', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('WINWORD.EXE', 'bar.txt', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
+            _ = "insert into LogList VALUES ('EXCEL.EXE', 'bcoin.csv', 'DetouredNtReadFile', '{}', false)".Execute();
         }
 
         public static void InitSampleData()

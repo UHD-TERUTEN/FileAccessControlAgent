@@ -2,7 +2,6 @@
 using FileAccessControlAgent.Managers;
 using FileAccessControlAgent.Samples;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows;
@@ -22,10 +21,12 @@ namespace FileAccessControlAgent
             Dispatcher.UnhandledException += DispatcherUnhandledException;
 
             // Initialize the database
-            DBManager.Init();
-            DropTables();
-            CreateTables();
-            MenuSamples.InitSampleData();
+            if (DBManager.Init())
+            {
+                DropTables();
+                CreateTables();
+                //MenuSamples.InitSampleData();
+            }
 
             // Run threads
             string parentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName + "\\";
@@ -34,10 +35,11 @@ namespace FileAccessControlAgent
                 string[] arguments = streamReader.ReadLine()?.Split(' ');
                 if (arguments != null)
                 {
-                    TCPRequestManager.Server = arguments[0];
-                    TCPRequestManager.Port = int.Parse(arguments[1]);
+                    HttpRequestManager.Server = arguments[0];
+                    HttpRequestManager.Port = int.Parse(arguments[1]);
                 }
             }
+            ThreadPool.QueueUserWorkItem(FileAccessRejectNotifier.ReceiveNotification);
         }
 
         private new void DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -53,8 +55,8 @@ namespace FileAccessControlAgent
         private static void CreateTables()
         {
             _ = "create table if not exists RecentNotifications (Notification text)".Execute();
-            _ = "create table if not exists WhitelistVersion (Version varchar(9))".Execute();
-            _ = "create table if not exists LogList (DateTime text, ProgramName varchar(250), Preview varchar(50))".Execute();
+            _ = "create table if not exists WhitelistVersion (Id integer, Version varchar(10), LastDistributed varchar(30))".Execute();
+            _ = "create table if not exists LogList (ProgramName varchar(250), FileName varchar(250), Operation varchar(20), PlainText text unique, IsAccept boolean)".Execute();
         }
 
         private static void DropTables()

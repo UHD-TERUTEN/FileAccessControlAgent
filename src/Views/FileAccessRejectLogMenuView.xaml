@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loaded="OnLoad"
     Style="{StaticResource MenuViewStyle}">
 
     <Grid>
@@ -12,16 +13,24 @@
             <ListView.View>
                 <GridView AllowsColumnReorder="True">
                     <GridViewColumn
-                            Header="시간" Width="120"
-                            DisplayMemberBinding="{Binding Path=DateTime}" />
-
-                    <GridViewColumn
-                            Header="프로그램" Width="200"
+                            Header="프로그램" Width="120"
                             DisplayMemberBinding="{Binding Path=ProgramName}" />
 
                     <GridViewColumn
-                            Header="로그" Width="240"
-                            DisplayMemberBinding="{Binding Path=Preview}" />
+                            Header="파일" Width="120"
+                            DisplayMemberBinding="{Binding Path=FileName}" />
+
+                    <GridViewColumn
+                            Header="접근" Width="120"
+                            DisplayMemberBinding="{Binding Path=Operation}" />
+
+                    <GridViewColumn
+                            Header="원문" Width="120"
+                            DisplayMemberBinding="{Binding Path=PlainText}" />
+                    
+                    <GridViewColumn
+                            Header="허용 여부" Width="120"
+                            DisplayMemberBinding="{Binding Path=IsAllow}" />
                 </GridView>
             </ListView.View>
         </ListView>

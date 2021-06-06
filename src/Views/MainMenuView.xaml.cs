@@ -3,6 +3,7 @@ using FileAccessControlAgent.Managers;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using Environment = System.Environment;
 
 namespace FileAccessControlAgent.Views
 {
@@ -11,18 +12,11 @@ namespace FileAccessControlAgent.Views
         public string notification { get; private set; }
     }
 
-    public class WhitelistVersion : ITCPResponse
+    public class WhitelistVersion : IHttpResponse
     {
-        private string result;
-
-        public string Result { get { return result; } set { result = value; } }
+        public int Id { get; set; }
         public string Version { get; set; }
-    }
-
-    public class GetWhitelistVersion : ITCPRequest
-    {
-        public string Method { get { return "Get"; } }
-        public string Target { get { return "WhitelistVersion"; } }
+        public DateTime? LastDistributed { get; set; }
     }
 
     public partial class MainMenuView : UserControl
@@ -30,25 +24,51 @@ namespace FileAccessControlAgent.Views
         public MainMenuView()
         {
             InitializeComponent();
+            UpdateData();
+        }
 
+        private async void Update(object sender, RoutedEventArgs e)
+        {
+            progressRing.IsActive = true;
+            try
+            {
+                var latest = await "api/whitelist/latest".Get<WhitelistVersion>();
+                if (latest.LastDistributed is null)
+                    latest.LastDistributed = DateTime.Today;
+                _ = $"insert into WhitelistVersion values({latest.Id},'{latest.Version}','{latest.LastDistributed?.ToShortDateString()}')".Execute();
+                _ = $"insert into RecentNotifications values('화이트리스트 업데이트 {latest.Version}')".Execute();
+                UpdateData();
+                MessageBox.Show($"화이트리스트를 업데이트했습니다.\n[Version] {latest.Version}");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"화이트리스트 업데이트에 실패했습니다.\n{exception.Message}");
+            }
+            progressRing.IsActive = false;
+        }
+
+        private void UpdateData()
+        {
             // Load the recentNotifications
             var notificationTextBlock = recentNotifications.Content as TextBlock;
+            notificationTextBlock.Text = "";
 
-            foreach (var notification in "select * from RecentNotifications".Read<Notification>())
+            var notifications = "select * from RecentNotifications".Read<Notification>();
+            if (notifications.Count > 0)
             {
-                notificationTextBlock.Text += notification.notification + Environment.NewLine;
+                foreach (var notification in notifications)
+                    notificationTextBlock.Text += notification.notification + Environment.NewLine;
             }
 
             // Load the whitelistVersion
-            whitelistVersion.Text = "select * from WhitelistVersion".Read<WhitelistVersion>()[0].Version;
+            var versions = "select * from WhitelistVersion".Read<WhitelistVersion>();
+            if (versions.Count > 0)
+                whitelistVersion.Text = versions[0].Version;
         }
 
-        private void Update(object sender, RoutedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
-            progressRing.IsActive = true;
-            var res = (new GetWhitelistVersion()).SendRequest<WhitelistVersion>();
-            MessageBox.Show($"화이트리스트를 업데이트했습니다.\n[{res.Result}] {res.Version}");
-            progressRing.IsActive = false;
+            UpdateData();
         }
     }
 }

@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     mc:Ignorable="d"
+    Loaded="OnLoad"
     Style="{StaticResource MenuViewStyle}">
     
     <Grid>
@@ -28,12 +29,12 @@
         <TextBlock
             Name="whitelistVersion"
             Style="{StaticResource TextBlockStyle}"
-            Margin="100,340,0,0" Width="40" Text="v1.0.0" />
+            Margin="100,340,0,0" Width="100" Text="v1.0.0" />
         
         <Button
             Name="syncWhitelistButton"
             Style="{StaticResource DataSendButtonStyle}"
-            Margin="160,340,0,0" Content="업데이트" Click="Update" />
+            Margin="210,340,0,0" Content="업데이트" Click="Update" />
 
         <mah:ProgressRing
             Name="progressRing"
